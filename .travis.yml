@@ -2,6 +2,11 @@ language: go
 go:
   - "1.15"
 
+env:
+  global:
+    # COVERALLS_TOKEN used to send code converage result to coveralls.io
+    secure: Qp7lBmOP3VM/qi9XRaNvzJcvvoMZ7fBRPxXZdZCXGQBRjOTJZMla6pzkXV2Xjj7wt1MvW8aJ/pj74yNljv35RQW6uUQ8Co9zKHI6sKsmWnvFeFuGuL0WnAO1jLdtQF7cwtYZMf27XMXBybMnM/WZu30aY5ZD9AhIa/i87tBhMFRX3SckRNSHpUTzQYHuRahbmrqLc2RC+s3pkH6SRomTAct/FLMfxiKf2nO29/H5jEwedYl+g/Ek3fSsMOSVVG3AmXJriiR3j1e6smT9tsT6DteSiB1o4GinfUrTDRxlBIMAdPIHIeaU7AFDv9us3QAtzvPxkYtNbTGwRt/nOEvCICtXM6A9krbm4JVG1TlGmCBM2RzAaaVJ/SCtU5U+iYR+dP72DkNzNEI11uTPLZLE6THbl2yZA7uqgcQsk0uQCYyZ8/67R9M+swOuHkaph/OpOU7cabfsjoPEnJ6NHQbZz8d29l7qiU6268ga89D6yiptxe5a1Cdrw7jU/AVyiC52GHaP21BM6YTyxBe3nN2DvieayWnUlgubaeSUTQUpdDSLt9o+K2sQMv8MHt3vGOaDgouJ7NgGToPmECcClL0EM6JXNPfjFJEV/AncGBz8kYeL+SOCzwE2KdyflzF/2gpMbPzyTfeenIjnCuZjQfZo3lli+BMF4zOCxkHB7ALCal8=
+
 stages:
   - test
 
@@ -11,15 +16,12 @@ jobs:
       name: Lint
       script:
         - make lint
-
     - stage: test
       name: Test
       script: make test
-
     - stage: test
       name: Coverage
       script: make coverage
-
     - stage: test
       name: Build
       script: make build

@@ -11,6 +11,12 @@ lint:
 test:
 	go test -v -race ./...
 
+coverage:
+	GO111MODULE=off go get golang.org/x/tools/cmd/cover
+	GO111MODULE=off go get github.com/mattn/goveralls
+	go test -v -covermode=count -coverprofile=coverage.out
+	goveralls -coverprofile=coverage.out -service=travis-ci
+
 vendor:
 	go mod vendor
 
