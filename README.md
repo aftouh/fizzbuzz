@@ -21,12 +21,12 @@ curl 'http://localhost:8080/v1/fizzbuzz?int1=3&int2=5&limit=16&str1=fizz&str2=bu
 
 This section describes the repository folders:
 
-- `config`: application config is handled using a yaml file that is pared with the [viper library](github.com/spf13/viper)
-  The default file is the `config.yaml` one that could be overridden by setting the `CONFIG_PATH` environment variable
-- `router`: creates the server routers and middlewares based on [go-chi library](github.com/go-chi/chi)
+- `config`: application config is handled using a yaml file that is parsed with the [viper library](https://github.com/spf13/viper).
+  The default file is the `config.yaml` one that could be overwritten by setting the `CONFIG_PATH` environment variable
+- `router`: defines the http server routers and middlewares based on [go-chi library](https://github.com/go-chi/chi)
 - `handlers`: implements the function handler of each server endpoint
-- `telemetry`: configure application logger, tracer and meter
-- `telemetry/logger`: Logger is based on the [zap library](go.uber.org/zap)
-- `telemetry/tracer`: Tracer exporter and provider are created using the [opentelemetry sdk](https://github.com/open-telemetry/opentelemetry-go). Server request spans are generated using the [httptracer middleware](github.com/go-chi/httptracer)
-- `telemetry/meter`: Exposes server runtime metrics on `:8082/metrics` endpoint. These metrics could be scrapped by prometheus
+- `telemetry`: configures application logger, tracer and meter
+- `telemetry/logger`: application logger uses the [zap library](https://go.uber.org/zap)
+- `telemetry/tracer`: tracer exporter and provider pipeline are created using the [opentelemetry sdk](https://github.com/open-telemetry/opentelemetry-go). Server request spans are generated using the [httptracer go-chi middleware](https://github.com/go-chi/httptracer)
+- `telemetry/meter`: exposes server runtime metrics on `:8082/metrics` endpoint. These metrics could be scrapped by prometheus
 - `chart`: contains a helm chart used to deploy the application in a kubernetes cluster

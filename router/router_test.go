@@ -9,7 +9,7 @@ import (
 
 func TestRouter(t *testing.T) {
 	// Use default config file
-	os.Setenv("CONFIG_FILE", "../config.yaml")
+	os.Setenv("CONFIG_PATH", "../config.yaml")
 
 	ts := httptest.NewServer(InitRouter())
 	defer ts.Close()
