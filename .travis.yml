@@ -5,10 +5,14 @@ go:
 env:
   global:
     # COVERALLS_TOKEN used to send code converage result to coveralls.io
-    secure: Qp7lBmOP3VM/qi9XRaNvzJcvvoMZ7fBRPxXZdZCXGQBRjOTJZMla6pzkXV2Xjj7wt1MvW8aJ/pj74yNljv35RQW6uUQ8Co9zKHI6sKsmWnvFeFuGuL0WnAO1jLdtQF7cwtYZMf27XMXBybMnM/WZu30aY5ZD9AhIa/i87tBhMFRX3SckRNSHpUTzQYHuRahbmrqLc2RC+s3pkH6SRomTAct/FLMfxiKf2nO29/H5jEwedYl+g/Ek3fSsMOSVVG3AmXJriiR3j1e6smT9tsT6DteSiB1o4GinfUrTDRxlBIMAdPIHIeaU7AFDv9us3QAtzvPxkYtNbTGwRt/nOEvCICtXM6A9krbm4JVG1TlGmCBM2RzAaaVJ/SCtU5U+iYR+dP72DkNzNEI11uTPLZLE6THbl2yZA7uqgcQsk0uQCYyZ8/67R9M+swOuHkaph/OpOU7cabfsjoPEnJ6NHQbZz8d29l7qiU6268ga89D6yiptxe5a1Cdrw7jU/AVyiC52GHaP21BM6YTyxBe3nN2DvieayWnUlgubaeSUTQUpdDSLt9o+K2sQMv8MHt3vGOaDgouJ7NgGToPmECcClL0EM6JXNPfjFJEV/AncGBz8kYeL+SOCzwE2KdyflzF/2gpMbPzyTfeenIjnCuZjQfZo3lli+BMF4zOCxkHB7ALCal8=
+    - secure: Qp7lBmOP3VM/qi9XRaNvzJcvvoMZ7fBRPxXZdZCXGQBRjOTJZMla6pzkXV2Xjj7wt1MvW8aJ/pj74yNljv35RQW6uUQ8Co9zKHI6sKsmWnvFeFuGuL0WnAO1jLdtQF7cwtYZMf27XMXBybMnM/WZu30aY5ZD9AhIa/i87tBhMFRX3SckRNSHpUTzQYHuRahbmrqLc2RC+s3pkH6SRomTAct/FLMfxiKf2nO29/H5jEwedYl+g/Ek3fSsMOSVVG3AmXJriiR3j1e6smT9tsT6DteSiB1o4GinfUrTDRxlBIMAdPIHIeaU7AFDv9us3QAtzvPxkYtNbTGwRt/nOEvCICtXM6A9krbm4JVG1TlGmCBM2RzAaaVJ/SCtU5U+iYR+dP72DkNzNEI11uTPLZLE6THbl2yZA7uqgcQsk0uQCYyZ8/67R9M+swOuHkaph/OpOU7cabfsjoPEnJ6NHQbZz8d29l7qiU6268ga89D6yiptxe5a1Cdrw7jU/AVyiC52GHaP21BM6YTyxBe3nN2DvieayWnUlgubaeSUTQUpdDSLt9o+K2sQMv8MHt3vGOaDgouJ7NgGToPmECcClL0EM6JXNPfjFJEV/AncGBz8kYeL+SOCzwE2KdyflzF/2gpMbPzyTfeenIjnCuZjQfZo3lli+BMF4zOCxkHB7ALCal8=
+    # DOCKERHUB_PASSWORD
+    - secure: lK7kbiVTWdvtC0EJkxEmY1DrWdY3VB732wCR5FkohqkLH4yrdEOcaZhVcRMkR8EQ+uFmDheJC0RZf6y1MPl6LC4OVQyqnxe9osx2pAYYUNZOIKDr2wishy0sSpHsN8IBhh6DpWRgYjbvWf+UIoH2sBzFxCecn/jneGtRszbUrjHWN18HhAGN3kc3AaPYk1S0ZxXUlje5ZjvyNuvPgvebXT3xw8Tw/J0Q6tB7k9blMfTZZao7Se431ebNDKLuJm0n6wPLCH/VMxWMooFkdkWxl5U2WbFACDfQvBOMoWY4GCprio97TIHYzNdzZOldQOXmQqoMqhexrAJYc4YnCUBiic1Yk+6ZbZjtiprIFQTCL6osHcmapKDL+/yqWGu+gFlMiMzFMYyBB8q0Vl2u3wor9yz0VkP0aFK4hiDB4/gkgKdg3R9maNg1FHfhB4hRZH1GSOrTPaH6ZiLWxd+NnFWLzJ/NhGgieW65kuCE1ttjbE6viMzsp/tDaoGM+jwbYch1oxPn1qiAGBrePqsEYsVwshktkoXPxVc0zNSfze8bGU5aRz4hdu7bWkGv0fibcpLGz2pAuh/WBUJoTFd2Jg6H/7KTasW+50KYZ2xD8Sc0p+1d5o94h5x7CGnMC6jMGZCMBlXEacTshIXsWJr//kyqgCCDJ3rUwD3ZthUtfNiNGGI=
 
 stages:
-  - test
+  - name: test
+  - name: release
+    if: branch = master AND type != pull_request
 
 jobs:
   include:
@@ -25,3 +29,11 @@ jobs:
     - stage: test
       name: Build
       script: make build
+
+    - stage: release
+      name: Docker
+      before_script: docker login -u=ftahmed -p="${DOCKERHUB_PASSWORD}"
+      deploy:
+        - provider: script
+          cleanup: false
+          script: make docker-release

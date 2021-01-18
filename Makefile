@@ -27,6 +27,6 @@ build:
 docker-build:
 	docker build --tag ftahmed/$(BINARY_NAME) .
 
-docker-release:
+docker-release: docker-build
 	docker tag ftahmed/$(BINARY_NAME) ftahmed/$(BINARY_NAME):$(VERSION)
 	docker push ftahmed/$(BINARY_NAME):$(VERSION)

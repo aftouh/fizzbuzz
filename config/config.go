@@ -29,7 +29,7 @@ var config AppConfig
 var once sync.Once
 
 const (
-	configFilePathVarName = "CONFIG_FILE"
+	configFilePathVarName = "CONFIG_PATH"
 	defaultConfigFilePath = "config.yaml"
 )
 
