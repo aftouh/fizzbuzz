@@ -1,4 +1,5 @@
 out/
+*.out
 bin/
 
 .DS_Store
@@ -6,6 +7,3 @@ bin/
 .idea
 *.iml
 .run
-
-*.xml
-*.cov
