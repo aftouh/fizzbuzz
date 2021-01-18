@@ -1,0 +1,5 @@
+apiVersion: v2
+name: fizzbuzz
+description: Helm chart to deploy fizzbuzz
+type: application
+version: 0.1.0

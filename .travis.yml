@@ -1,0 +1,25 @@
+language: go
+go:
+  - "1.15"
+
+stages:
+  - test
+
+jobs:
+  include:
+    - stage: test
+      name: Lint
+      script:
+        - make lint
+
+    - stage: test
+      name: Test
+      script: make test
+
+    - stage: test
+      name: Coverage
+      script: make coverage
+
+    - stage: test
+      name: Build
+      script: make build

@@ -1,0 +1,37 @@
+image:
+  repository: ftahmed/fizzbuzz
+  pullPolicy: IfNotPresent
+  tag: latest
+serviceAccount:
+  create: true
+service:
+  type: ClusterIP
+  port: 80
+ingress:
+  enabled: false
+  host: fizzbuzz.aftouh.com
+resources:
+  limits:
+    cpu: 250m
+    memory: 128Mi
+  requests:
+    cpu: 125m
+    memory: 64Mi
+autoscaling:
+  enabled: true
+  minReplicas: 1
+  maxReplicas: 3
+  targetCPUUtilizationPercentage: 60
+  targetMemoryUtilizationPercentage: 60
+config:
+  serviceName: fizzbuzz
+  environment: dev
+  port: 8080
+  logLevel: debug
+  metrics:
+    enabled: true
+    port: 8082
+  tracer:
+    enabled: true
+  allowedOrigins:
+    - "*"

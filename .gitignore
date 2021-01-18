@@ -1,0 +1,11 @@
+out/
+bin/
+
+.DS_Store
+.vscode
+.idea
+*.iml
+.run
+
+*.xml
+*.cov

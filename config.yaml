@@ -1,0 +1,11 @@
+serviceName: fizzbuzz
+environment: local # dev, pro
+port: 8080
+logLevel: debug
+metrics:
+  enabled: true
+  port: 8082
+tracer:
+  enabled: true
+allowedOrigins:
+  - "*"
