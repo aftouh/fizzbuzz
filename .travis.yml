@@ -34,6 +34,8 @@ jobs:
       name: Docker
       before_script: docker login -u=ftahmed -p="${DOCKERHUB_PASSWORD}"
       deploy:
-        - provider: script
-          cleanup: false
+        on:
+          branch: main
+        cleanup: false
+        provider: script
           script: make docker-release
