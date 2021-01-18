@@ -14,7 +14,7 @@ test:
 coverage:
 	GO111MODULE=off go get golang.org/x/tools/cmd/cover
 	GO111MODULE=off go get github.com/mattn/goveralls
-	go test -v -covermode=count -coverprofile=coverage.out
+	go test -v -covermode=count -coverprofile=coverage.out ./...
 	goveralls -coverprofile=coverage.out -service=travis-ci
 
 vendor:
