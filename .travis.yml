@@ -38,4 +38,4 @@ jobs:
           branch: main
         cleanup: false
         provider: script
-          script: make docker-release
+        script: make docker-release
