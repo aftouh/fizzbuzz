@@ -12,7 +12,7 @@ env:
 stages:
   - name: test
   - name: release
-    if: branch = master AND type != pull_request
+    if: branch = main AND type != pull_request
 
 jobs:
   include:
